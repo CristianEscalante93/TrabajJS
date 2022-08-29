@@ -67,7 +67,7 @@ if (formaPago==1){
         alert("Abono con cambio justo, por favor pase a retirar su compra, muchas gracias!!")
     }
 }else if(formaPago==2){
-    alert("Gracias por su compra dirijase a retirar la misma, muchas gracias!!")
+    alert("Gracias por su compra, revise su mail donde encontrara el link de pago, muchas gracias!!")
 }
 }
 
