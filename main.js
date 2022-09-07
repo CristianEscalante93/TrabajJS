@@ -1,20 +1,24 @@
-
+// array de stock de productos
 const stock = [];
 
+// array del carrito de compras
 const carrito = [];
 
+// clase constructora de objetos-productos
 class productoStock {
     constructor(id, nombre, precio) {
     this.id = id;
     this.nombre = nombre;
     this.precio = precio;}}
 
+// agregado de productos
 const nuevoProducto1 = new productoStock(1,"Colgante de 1 cuerpo",1500);
 const nuevoProducto2 = new productoStock(2,"Colgante de 2 cuerpos",2000);
 const nuevoProducto3 = new productoStock(3,"Lámpara vintage",1000);
 const nuevoProducto4 = new productoStock(4,"Lámpara moderna",2500);
 const nuevoProducto5 = new productoStock(5,"Solo portalamparas",500);
 
+// funcion agregar para cualquier array
 function cargar(array,objeto){
     array.push(objeto);
 }
@@ -25,11 +29,11 @@ cargar(stock,nuevoProducto3)
 cargar(stock,nuevoProducto4)
 cargar(stock,nuevoProducto5)
 
-
+// inicio de pedido de datos al cliente
 function NombreMail() {
     alert("Bienvenido a la mas variada tienda de iluminación")
     let nombre = prompt("Ingrese su nombre");
-    while(nombre === ""){
+    while(nombre === "" || !isNaN(nombre)){
     nombre = prompt("Ingrese su nombre");
     }
     let mail = prompt("Ingrese su mail");
@@ -39,36 +43,51 @@ function NombreMail() {
     alert("Bienvenido " + nombre + " , espero encuentre lo que esta buscando")
 }
 
-function lamparas(){
-let producto;
-do{
-producto = parseInt(prompt("Elija su accesorio de iluminación : \n1)Colgante de 1 cuerpo\n2)Colgante de 2 cuerpos\n3)Lámpara vintage\n4)Lámpara moderna\n5)Solo portalámparas"))}while(producto < 1 || producto > 5)
+// eleccion de productos
+let seguir = true;
+let insumo;
+function lamparas() {
+    let precioTotal;
+    while (seguir === true) {
+        insumo = parseInt(prompt(("Elija su accesorio de iluminación : \n1)Colgante de 1 cuerpo\n2)Colgante de 2 cuerpos\n3)Lámpara vintage\n4)Lámpara moderna\n5)Solo portalámparas\n6)Finalizar pedido")));
+        switch (insumo) {
+            case 1:
+                cargar(carrito, nuevoProducto1);
+                alert('Selecciono' + ' ' + nuevoProducto1.nombre + ' ' + 'que cuesta $' + ' ' + nuevoProducto1.precio);
+                break;
+            case 2:
+                cargar(carrito, nuevoProducto2);
+                alert('Selecciono' + ' ' + nuevoProducto2.nombre + ' ' + 'que cuesta $' + ' ' + nuevoProducto2.precio);
+                break;
+            case 3:
+                cargar(carrito, nuevoProducto3);
+                alert('Selecciono' + ' ' + nuevoProducto3.nombre + ' ' + 'que cuesta $' + ' ' + nuevoProducto3.precio);
+                break;
+            case 4:
+                cargar(carrito, nuevoProducto4);
+                alert('Selecciono' + ' ' + nuevoProducto4.nombre + ' ' + 'que cuesta $' + ' ' + nuevoProducto4.precio);
+                break;
+            case 5:
+                cargar(carrito, nuevoProducto5);
+                alert('Selecciono' + ' ' + nuevoProducto5.nombre + ' ' + 'que cuesta $' + ' ' + nuevoProducto5.precio);
+                break;
+            case 6:
+                seguir = false;
+                alert('Usted ha finalizado la compra');
+                break;
+            default:
+                alert('Opción no válida');
+                break;}
+                
+            precioTotal = carrito.reduce((acc,el)=> acc + el.precio, 0 );
+            }
+            return precioTotal;
+        }
 
-switch(producto){
-    case 1:
-        return nuevoProducto1.nombre;
-    case 2:
-        return nuevoProducto2.nombre;
-    case 3:
-        return nuevoProducto3.nombre;
-    case 4:
-        return nuevoProducto4.nombre;
-    case 5:
-        return nuevoProducto5.nombre;
-}}
 
-function filtroProducto(array,prod){
-const filtro= array.filter((elemento)=>{return elemento.nombre.includes(prod)});
-return filtro;
-}
-
-function Precio(producto){
-    let precioProd= producto[0].precio
-    return precioProd
-    }
-
-function cobro(array,precio){
-alert("Su eleccion fue: "+array[0].nombre+"\nPrecio: $"+precio);
+// pago
+function cobro(precio){
+alert("Precio total de la compra: $"+precio);
 let formaPago;
 do{
     formaPago = parseInt(prompt("Como desea abonar?\n1)Efectivo\n2)Tarjeta"))
@@ -88,8 +107,7 @@ if (formaPago==1){
 
 
 NombreMail();
-let tipoLampara = lamparas();
-let eleccion = filtroProducto(stock, tipoLampara)
-let precio = Precio(eleccion);
-cobro(eleccion,precio);
+const resultado = lamparas();
+console.log(resultado);
+cobro(resultado);
 
