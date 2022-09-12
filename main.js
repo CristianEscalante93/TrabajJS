@@ -4,6 +4,11 @@ const stock = [];
 // array del carrito de compras
 const carrito = [];
 
+//constantes
+const h2 = document.getElementById("h2");
+const stockProductos= document.getElementById("stock");
+const compras = document.getElementById("compras")
+
 // clase constructora de objetos-productos
 class productoStock {
     constructor(id, nombre, precio) {
@@ -30,17 +35,19 @@ cargar(stock,nuevoProducto4)
 cargar(stock,nuevoProducto5)
 
 // inicio de pedido de datos al cliente
+let nombre;
 function NombreMail() {
     alert("Bienvenido a la mas variada tienda de iluminación")
-    let nombre = prompt("Ingrese su nombre");
+    nombre = prompt("Ingrese su nombre");
     while(nombre === "" || !isNaN(nombre)){
     nombre = prompt("Ingrese su nombre");
-    }
+    return}
     let mail = prompt("Ingrese su mail");
     while(mail === ""){
     mail = prompt("Ingrese su mail");
     }
-    alert("Bienvenido " + nombre + " , espero encuentre lo que esta buscando")
+    alert("Bienvenido " + nombre + " , espero encuentre lo que esta buscando");
+    h2.innerText= "Buenas " + nombre + " , a continuacion podra ver su compra";
 }
 
 // eleccion de productos
@@ -80,10 +87,10 @@ function lamparas() {
                 break;}
                 
             precioTotal = carrito.reduce((acc,el)=> acc + el.precio, 0 );
+            
             }
             return precioTotal;
         }
-
 
 // pago
 function cobro(precio){
@@ -105,9 +112,29 @@ if (formaPago==1){
 }
 }
 
+// tarjetas del stock
+
+for (const producto of stock) {
+    let prod = document.createElement('div')
+    prod.innerHTML=`<div class="card">
+    <h3>${producto.nombre}</h3>
+    <p>${producto.precio}</p>
+    </div>`
+    stockProductos.append(prod) 
+}
 
 NombreMail();
 const resultado = lamparas();
 console.log(resultado);
 cobro(resultado);
 
+// tarjetas de compras
+for (const producto of carrito) {
+    let prodCarrito = document.createElement('div')
+    prodCarrito.innerHTML=`<div class="card">
+    <h3>${producto.nombre}</h3>
+    <p>${producto.precio}</p>
+    </div>`
+    compras.append(prodCarrito) 
+}
+/* <img src="../img/${servicio.img}" alt=""></img> */
