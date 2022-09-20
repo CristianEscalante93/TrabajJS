@@ -2,7 +2,7 @@
 const stock = [];
 
 // array del carrito de compras
-const carrito = [];
+const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 //constantes
 const h2 = document.getElementById("h2");
@@ -11,7 +11,10 @@ const compras = document.getElementById("compras");
 const nomb = document.getElementById("nombre");
 const email = document.getElementById("email");
 const btnEnviar = document.getElementById("btnCargar");
+const btnBorrar = document.getElementById("btnBorrar")
+const checkbox = document.getElementById("checkbox");
 const precioTotal = document.getElementById("total");
+const finalizar = document.getElementById("finalizar")
 
 
 // clase constructora de objetos-productos
@@ -44,7 +47,41 @@ let nombre;
 btnEnviar.addEventListener("click",()=> {
     nombre = nomb.value;
     h2.innerText= "Buenas " + nombre + " , a continuacion podra ver su compra";
-})
+    if (checkbox.checked) {
+        setDatos("localStorage");
+        } else {
+        setDatos("sessionStorage");
+        }
+    });
+
+btnBorrar.addEventListener("click",()=> {
+    nomb.value="";
+    email.value= "";
+    localStorage.removeItem("cliente")
+});
+
+
+//local inicio
+function setDatos(valor) {
+    let cliente = { nombre: nomb.value, mail: email.value };
+    if (valor === "sessionStorage") {
+    sessionStorage.setItem("user", JSON.stringify(cliente));
+    }
+    if (valor === "localStorage") {
+    localStorage.setItem("cliente", JSON.stringify(cliente));
+    }
+    return cliente;
+    }
+
+function getDatos(datos) {
+    if (datos) {
+    nomb.value = datos.nombre;
+    email.value = datos.mail;
+    }
+}
+
+getDatos(JSON.parse(localStorage.getItem("cliente")));
+
 
 // tarjetas del stock
 function tarjetasStock () {
@@ -89,12 +126,13 @@ for (const producto of carrito) {
     let prodCarrito = document.createElement('div')
     prodCarrito.innerHTML=`<div class="card">
     <h3>${producto.nombre}</h3>
-    <p> $ ${producto.precio}</p>
+    <p> $ ${producto.precio*producto.cantidad}</p>
     <h3>CANTIDAD: ${producto.cantidad}</h3>
     <button class="btnCarrito" id="btn-borrar${producto.id}">Borrar</button>
     </div>`
     compras.append(prodCarrito) 
 }
+localStorage.setItem("carrito", JSON.stringify(carrito))
 borrar();
 let precioTot;
     precioTot = carrito.reduce((acc,el)=> acc + ((el.precio)*(el.cantidad)), 0 );
@@ -112,6 +150,20 @@ function borrar(){
     })
 }
 
+//finalizar
+function fin(){
+    finalizar.addEventListener("click",()=>{
+        localStorage.removeItem("carrito");
+        for (let index = 0; index < carrito.length; index++) {
+            carrito.splice(index,carrito.length);;
+        }
+        console.log("fin");
+        console.log(carrito);
+        mostrarCarrito();
+    })
+}
+
 
 mostrarCarrito();
 tarjetasStock();
+fin();
