@@ -1,7 +1,7 @@
 // array de stock de productos
 const stock = [];
 
-// array del carrito de compras
+// array del carrito de compras (use or)
 const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 //constantes
@@ -42,16 +42,12 @@ cargar(stock,nuevoProducto3)
 cargar(stock,nuevoProducto4)
 cargar(stock,nuevoProducto5)
 
-// inicio de pedido de datos al cliente
+// inicio de pedido de datos al cliente (use operador ternario)
 let nombre;
 btnEnviar.addEventListener("click",()=> {
     nombre = nomb.value;
     h2.innerText= "Buenas " + nombre + " , a continuacion podra ver su compra";
-    if (checkbox.checked) {
-        setDatos("localStorage");
-        } else {
-        setDatos("sessionStorage");
-        }
+    checkbox.checked ? setDatos("localStorage") : setDatos("sessionStorage");
     });
 
 btnBorrar.addEventListener("click",()=> {
@@ -61,15 +57,11 @@ btnBorrar.addEventListener("click",()=> {
 });
 
 
-//local inicio
+//local inicio (use and)
 function setDatos(valor) {
     let cliente = { nombre: nomb.value, mail: email.value };
-    if (valor === "sessionStorage") {
-    sessionStorage.setItem("user", JSON.stringify(cliente));
-    }
-    if (valor === "localStorage") {
-    localStorage.setItem("cliente", JSON.stringify(cliente));
-    }
+    valor === "sessionStorage" && sessionStorage.setItem("user", JSON.stringify(cliente));
+    valor === "localStorage" && localStorage.setItem("cliente", JSON.stringify(cliente));
     return cliente;
     }
 
@@ -83,14 +75,15 @@ function getDatos(datos) {
 getDatos(JSON.parse(localStorage.getItem("cliente")));
 
 
-// tarjetas del stock
+// tarjetas del stock (use destructuring)
 function tarjetasStock () {
 for (const producto of stock) {
+    let {nombre, precio, id} = producto
     let prod = document.createElement('div')
     prod.innerHTML=`<div class="card">
-    <h3>${producto.nombre}</h3>
-    <p> $ ${producto.precio}</p>
-    <button id="agregar${producto.id}">Agregar</button>
+    <h3>${nombre}</h3>
+    <p> $ ${precio}</p>
+    <button id="agregar${id}">Agregar</button>
     </div>`
     stockProductos.append(prod) 
 }
@@ -119,16 +112,17 @@ function agregarCarrito(producto){
     mostrarCarrito();
     }
 
-// mostrar el carrito de compras
+// mostrar el carrito de compras (use destructuring)
 function mostrarCarrito(){
     compras.innerHTML = "";
 for (const producto of carrito) {
+    let {nombre, precio, id, cantidad} = producto
     let prodCarrito = document.createElement('div')
     prodCarrito.innerHTML=`<div class="card">
-    <h3>${producto.nombre}</h3>
-    <p> $ ${producto.precio*producto.cantidad}</p>
-    <h3>CANTIDAD: ${producto.cantidad}</h3>
-    <button class="btnCarrito" id="btn-borrar${producto.id}">Borrar</button>
+    <h3>${nombre}</h3>
+    <p> $ ${precio*cantidad}</p>
+    <h3>CANTIDAD: ${cantidad}</h3>
+    <button class="btnCarrito" id="btn-borrar${id}">Borrar</button>
     </div>`
     compras.append(prodCarrito) 
 }
