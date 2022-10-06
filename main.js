@@ -22,44 +22,14 @@ const formCuota = document.querySelector('.form-cuota');
 const divCuota = document.querySelector('.divCuotas');
 const tipoDePago = document.querySelector('.tipoDePago');
 
-
-// // clase constructora de objetos-productos
-// class productoStock {
-//     constructor(id, nombre, precio) {
-//     this.id = id;
-//     this.nombre = nombre;
-//     this.precio = precio;}}
-
-// // agregado de productos
-// const nuevoProducto1 = new productoStock(1,"Colgante de 1 cuerpo",1500);
-// const nuevoProducto2 = new productoStock(2,"Colgante de 2 cuerpos",2000);
-// const nuevoProducto3 = new productoStock(3,"Lámpara vintage",1000);
-// const nuevoProducto4 = new productoStock(4,"Lámpara moderna",2500);
-// const nuevoProducto5 = new productoStock(5,"Solo portalamparas",500);
-
 // funcion agregar para cualquier array
 function cargar(array,objeto){
     array.push(objeto);
 }
 
-// cargar(stock,nuevoProducto1)
-// cargar(stock,nuevoProducto2)
-// cargar(stock,nuevoProducto3)
-// cargar(stock,nuevoProducto4)
-// cargar(stock,nuevoProducto5)
-
-const stock1 = [];
-//     { id: 1, nombre: "Colgante de 1 cuerpo", precio: 1500, img: "colgante de un cuerpo.jpg" },
-//     { id: 2, nombre: "Colgante de 2 cuerpos", precio: 2000, img: "colgante 2 cuerpos.jpg" },
-//     { id: 3, nombre: "Lámpara vintage", precio: 1000, img: "lampara vintage.jpg" },
-//     { id: 4, nombre: "Lámpara moderna", precio: 2500, img: "lampara moderna.jpg" },
-//     { id: 5, nombre: "Solo portalamparas", precio: 500, img: "solo portalamparas.jpg" },
-//     { id: 6, nombre: "Lámpara globo", precio: 500, img: "lampara globo.jpg" },
-// ];
-console.log(stock1)
 async function fetchAPI(){
     try {
-    const URL='/data.json';
+    const URL='./data.json';
     const response = await fetch(URL);
     const data = await response.json();
     console.log(data);
@@ -73,10 +43,6 @@ tarjetasStock();
 }
 
 fetchAPI()
-
-
-
-
 
 // inicio de pedido de datos al cliente (use operador ternario)
 let nombre;
