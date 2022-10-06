@@ -1,0 +1,37 @@
+[{
+    "id":1,
+    "nombre":"Colgante de 1 cuerpo",
+    "precio":1500,
+    "img":"colgante de un cuerpo.jpg"
+},
+{
+    "id":2,
+    "nombre":"Colgante de 2 cuerpos",
+    "precio":2000,
+    "img":"colgante 2 cuerpos.jpg"
+},
+{
+    "id":3,
+    "nombre":"Lámpara vintage",
+    "precio":1000,
+    "img":"lampara vintage.jpg"
+},
+{
+    "id":4,
+    "nombre":"Lámpara moderna",
+    "precio":2500,
+    "img":"lampara moderna.jpg"
+},
+{
+    "id":5,
+    "nombre":"Solo portalamparas",
+    "precio":500,
+    "img":"solo portalamparas.jpg"
+},
+{
+    "id":6,
+    "nombre":"Lámpara globo",
+    "precio":500,
+    "img":"lampara globo.jpg"
+}
+]
