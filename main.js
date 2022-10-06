@@ -108,7 +108,7 @@ for (const producto of stock) {
     prod.innerHTML=`<div class="card card1 mb-3 sombra" style="max-width: 540px;">
     <div class="row g-0">
         <div class="col-md-4">
-        <img src="../imagenes/${img}" class="img-fluid rounded-start cardImage1" alt="...">
+        <img src="./../imagenes/${img}" class="img-fluid rounded-start cardImage1" alt="...">
     </div>
     <div class="col-md-8 ">
         <div class="card-body h-100 cardContent">
