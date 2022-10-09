@@ -105,7 +105,7 @@ function tarjetasStock () {
 for (const producto of stock) {
     let {nombre, precio, id, img} = producto
     let prod = document.createElement('div')
-    prod.innerHTML=`<div class="card card1 mb-3 sombra" style="max-width: 540px;">
+    prod.innerHTML=`<div class="card card1 mb-3 sombra sombraDia" id="cardDia"  style="max-width: 540px;">
     <div class="row g-0">
         <div class="col-md-4">
         <img src="./../imagenes/${img}" class="img-fluid rounded-start cardImage1" alt="...">
@@ -154,7 +154,7 @@ for (const producto of carrito) {
     let {nombre, precio, id, img, cantidad} = producto
     let prodCarrito = document.createElement('div')
 
-    prodCarrito.innerHTML=`<div class="card card1 mb-3 sombra" style="max-width: 540px;">
+    prodCarrito.innerHTML=`<div class="card card1 mb-3 sombra" id="cardDia" style="max-width: 540px;">
     <div class="row g-0">
         <div class="col-md-4">
         <img src="../imagenes/${img}" class="img-fluid rounded-start " alt="...">
@@ -311,6 +311,27 @@ function cancel(){
         })
     })
 }
+const tit1=document.querySelector('.tit1');
+const tit2=document.querySelector('.tit2');
+const tit3=document.querySelector('.tit3');
+const tit4=document.querySelector('.tit4');
+const cardDia= document.querySelector('#cardDia')
+
+const btnSwitch = document.querySelector('#switch');
+btnSwitch.addEventListener('click',()=>{
+document.body.classList.toggle('dark');
+document.body.classList.toggle('fondo')
+btnSwitch.classList.toggle('active');
+tit1.classList.toggle('dark')
+tit1.classList.toggle('fondo')
+tit2.classList.toggle('dark')
+tit2.classList.toggle('fondo')
+tit3.classList.toggle('dark')
+tit3.classList.toggle('fondo')
+tit4.classList.toggle('dark')
+tit4.classList.toggle('fondo')
+cardDia.classList.remove('card1')
+})
 
 
 mostrarCarrito();
